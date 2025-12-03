@@ -4,7 +4,7 @@ An assignment to explore sockets and multithreading. MAKE SURE TO COMMIT AND PUS
 
 ## Wave 1: Understand
 1. Take a moment to read through the ChatterboxClient.java file. Note what is currently implemented, and what you will be expected to implement.
-1. Try running ChatterboxServer using the example command in ChatterboxServer.java. You dod not need to understand everything in this file, but you will be using the server to validate that your client is working!
+1. Try running ChatterboxServer using the example command in ChatterboxServer.java. You do not need to understand everything in this file, but you will be using the server to validate that your client is working!
 1. Try running ChatterboxClient using the command in the file. It will tell you that argument parsing is not yet implemented (because you haven't written it yet!) This is expected
 
 ## Wave 2: Argument Parsing
@@ -31,14 +31,14 @@ An assignment to explore sockets and multithreading. MAKE SURE TO COMMIT AND PUS
 1. Make sure you've committed and pushed!
 
 ## Wave 6: Print Incoming
-1. Implement `printIncomingChats` and call it in `streamChats`. Do not yet worry about threading or outgoing chats.
+1. Implement `printIncomingChats` and call it in `streamChat`. Do not yet worry about threading or outgoing chats.
 1. MAKE SURE THE SERVER IS RUNNING.
 1. Validate your solution by re-running the client. Make sure to use localhost and the same port the server is on.
 1. You should see a repeated heartbeat message from the server when it is working.
 1. Make sure you've committed and pushed!
 
 ## Wave 7: Send Outgoing
-1. Implement `sendOutgoingChats`. Modify `streamChats` so that it properly multithreads between printing incoming and sending outgoing.
+1. Implement `sendOutgoingChats`. Modify `streamChat` so that it properly multithreads between printing incoming and sending outgoing.
 1. MAKE SURE THE SERVER IS RUNNING.
 1. Validate your solution by re-running the client. Make sure to use localhost and the same port the server is on.
 1. Try connecting multiple clients! You'll need to use different usernames/passwords from sample_users.txt
