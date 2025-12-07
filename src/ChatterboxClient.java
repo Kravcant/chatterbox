@@ -199,17 +199,15 @@ public class ChatterboxClient {
         // Make sure to have this.serverReader and this.serverWriter set by the end of this method!
         // hint: get the streams from the sockets, use those to create the InputStreamReader/OutputStreamWriter and the BufferedReader/BufferedWriter
 
-        // Create a socket connection to the server
+        // Create a new socket connection to the server
         Socket socket = new Socket(this.host, this.port);
     
         // Get input and output streams from the socket
-        this.serverReader = new BufferedReader(
-            new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8)
-        );
+        this.serverReader = new BufferedReader(new InputStreamReader(socket.getInputStream(),
+            StandardCharsets.UTF_8));
     
-        this.serverWriter = new BufferedWriter(
-            new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8)
-        );
+        this.serverWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),
+            StandardCharsets.UTF_8));
     }
 
     /**
@@ -233,9 +231,31 @@ public class ChatterboxClient {
      * @throws IllegalArgumentException for bad credentials / server rejection
      */
     public void authenticate() throws IOException, IllegalArgumentException {
-        throw new UnsupportedOperationException("Authenticate not yet implemented. Implement authenticate() and remove this exception!");
+
         // Hint: use the username/password instance variables, DO NOT READ FROM userInput
         // send messages using serverWriter (don't forget to flush!)
+
+        // Read the starting prompt
+        String prompt = this.serverReader.readLine();
+        if (prompt != null) {
+            this.userOutput.write((prompt + "\n").getBytes(StandardCharsets.UTF_8));
+            this.userOutput.flush();
+        }
+
+        // Send username and password
+        String credentials = this.username + " " + this.password + "\n";
+        this.serverWriter.write(credentials);
+        this.serverWriter.flush();
+
+        // Read server response and authenticate it
+        String response = this.serverReader.readLine();
+        if (response == null || !response.startsWith("Welcome")) {
+            throw new IllegalArgumentException(response != null ? response : "Server closed connection");
+        }
+
+        // Print welcome message if authentication passed
+        this.userOutput.write((response + "\n").getBytes(StandardCharsets.UTF_8));
+        this.userOutput.flush();
     }
 
     /**
